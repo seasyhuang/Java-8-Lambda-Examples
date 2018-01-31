@@ -4,18 +4,32 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Java8LambdasPart1 {
-	
-	
+
+/*	http://www.java-programming.info/tutorial/pdf/java/13-Java-8-Lambda-Expressions-Part-1.pdf
+	Exercises from java-programming.info
+	Part 1
+*/	
 	public static void main(String[] args) {
 		
-		part1();
-		part2();
+//		part1();
+		
+		String s1 = "hello";
+		String s2 = "test string";
+		String longer = betterString(s1, s2, (s3, s4) -> s1.length() > s2.length());		// part 2
+		
+		System.out.println(longer);
+		
+		Person p1 = new Person("Charles", "Dickens", 60);
+		Person p2 = new Person("Lewis", "Carroll", 62);
+		Person older = betterElement(p1, p2, (p3, p4) -> p1.getFirstName().length() > p2.getFirstName().length());
+		
+		System.out.println(p1);
+		System.out.println(p2);
+		System.out.println(older);
 		
 	} 
 	
 	public static void part1() {
-
-//		http://www.java-programming.info/tutorial/pdf/java/13-Java-8-Lambda-Expressions-Part-1.pdf
 		String s1 = "hello world";
 		String s2 = "world helo";
 		String s3 = "testing string";
@@ -77,7 +91,24 @@ public class Java8LambdasPart1 {
 		return compareFlag;		
 	}
 
-	public static void part2() {
-		
+	public static String betterString(String s1, String s2, TwoStringPredicate twoPredicate) {
+		if (twoPredicate.test(s1, s2)) {
+			return s1;
+		} else { return s2; }
 	}
+	
+	public static <T> T betterElement(T t1, T t2, TwoElementPredicate<T> twoPredicate) {
+		if (twoPredicate.test(t1, t2)) {
+			return t1;
+		} else { return t2; }
+	}
+}
+
+interface TwoStringPredicate {
+	Boolean test(String s1, String s2);
+}
+
+interface TwoElementPredicate<T> {
+	Boolean test(T t1, T t2);
+	
 }
