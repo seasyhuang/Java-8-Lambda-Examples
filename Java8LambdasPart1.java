@@ -11,21 +11,21 @@ public class Java8LambdasPart1 {
 */	
 	public static void main(String[] args) {
 		
-//		part1();
+		part1();
 		
-		String s1 = "hello";
-		String s2 = "test string";
-		String longer = betterString(s1, s2, (s3, s4) -> s1.length() > s2.length());		// part 2
-		
-		System.out.println(longer);
-		
-		Person p1 = new Person("Charles", "Dickens", 60);
-		Person p2 = new Person("Lewis", "Carroll", 62);
-		Person older = betterElement(p1, p2, (p3, p4) -> p1.getFirstName().length() > p2.getFirstName().length());
-		
-		System.out.println(p1);
-		System.out.println(p2);
-		System.out.println(older);
+//		String s1 = "hello";
+//		String s2 = "test string";
+//		String longer = betterString(s1, s2, (s3, s4) -> s1.length() > s2.length());		// part 2
+//		
+//		System.out.println(longer);
+//		
+//		Person p1 = new Person("Charles", "Dickens", 60);
+//		Person p2 = new Person("Lewis", "Carroll", 62);
+//		Person older = betterElement(p1, p2, (p3, p4) -> p1.getFirstName().length() > p2.getFirstName().length());
+//		
+//		System.out.println(p1);
+//		System.out.println(p2);
+//		System.out.println(older);
 		
 	} 
 	
@@ -77,7 +77,8 @@ public class Java8LambdasPart1 {
 		System.out.println(Arrays.toString(lambdaTestStrings) + "\n");
 		
 		System.out.println("Strings that contain “e” first, everything else second");
-		Arrays.sort(testStrings, (ls1, ls2) -> sortByE(ls1, ls2));
+//		Arrays.sort(testStrings, (ls1, ls2) -> sortByE(ls1, ls2));
+		Arrays.sort(testStrings, Java8LambdasPart1::sortByE);
 		System.out.println(Arrays.toString(testStrings) + "\n");
 	}
 	
@@ -104,10 +105,13 @@ public class Java8LambdasPart1 {
 	}
 }
 
+@FunctionalInterface
 interface TwoStringPredicate {
 	Boolean test(String s1, String s2);
+//	void rfdsa();
 }
 
+@FunctionalInterface
 interface TwoElementPredicate<T> {
 	Boolean test(T t1, T t2);
 	
